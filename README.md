@@ -4,7 +4,7 @@ R-PointHop is an unsupervised learning based method for registration of 3D point
 
 ## Introduction
 
-In this work, we introdcue R-PointHop which is am improved version of our previous work on point cloud registration named Salient Points Analysis (SPA). Link to the SPA paper can be found [here](https://ieeexplore.ieee.org/document/9301874). 
+In this work, we introdcue R-PointHop which is am improved version of our previous work on point cloud registration named Salient Points Analysis (SPA). The SPA paper can be found [here](https://ieeexplore.ieee.org/document/9301874). 
 
 ## Citation
 
