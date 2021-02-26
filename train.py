@@ -9,14 +9,15 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--initial_point', type=int, default=1024, 
-                    help='Point Number [256/512/1024/2048]')
-parser.add_argument('--model_dir', default='./log', 
-                    help='Log dir [default: log]')
+                    help='Number of points to be used')
+parser.add_argument('--model_dir', default='./model', 
+                    help='Model directory [default: model]')
 parser.add_argument('--num_point', default=[1024, 768, 512, 384], 
-                    help='Point Number after down sampling')
+                    help='Point number after down sampling')
 parser.add_argument('--num_sample', default=[64, 32, 48, 48], 
-                    help='KNN query number')
-parser.add_argument('--threshold', default=0.001, help='threshold')
+                    help='kNN query number')
+parser.add_argument('--threshold', default=0.001, 
+                    help='energy threshold for channel-wise Saab transform')
 FLAGS = parser.parse_args()
 
 initial_point = FLAGS.initial_point
