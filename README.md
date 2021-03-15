@@ -6,6 +6,8 @@ R-PointHop is an unsupervised learning based method for registration of 3D point
 
 ## Introduction
 
+R-PointHop is an unsupervised learning method for registration of two point cloud objects. It derives point features from training data statistics in a hierarchical feedforward manner without end-to-end optimization. The features are used to find point correspondences which in turn lead to estimating the 3D transformation. More technical details can be found in our paper. 
+
 In this repository, we release the code for training R-PointHop method and evaluating on a given pair of point cloud objects.
 
 ## Packages
