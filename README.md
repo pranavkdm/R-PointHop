@@ -22,11 +22,19 @@ open3d
 
 ## Training
 
+Train the model on all 40 classes of ModelNet40 dataset
+
 ```
-python train.py
+python train.py --first_20 False
 ```
 
-This will train the model using default parameters. User can vary the parameters like number of points in each hop, neighborhood size and energy threshold.
+Train the model on first 20 classes of ModelNet40 dataset
+
+```
+python train.py --first_20 True
+```
+
+User can specify other parameters like number of points in each hop, neighborhood size and energy threshold, else default parameters will be used.
 
 ## Citation
 
