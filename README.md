@@ -36,6 +36,12 @@ python train.py --first_20 True
 
 User can specify other parameters like number of points in each hop, neighborhood size and energy threshold, else default parameters will be used.
 
+## Testing 
+
+python test.py --source ./data/source_0.ply ./data/target_0.ply
+
+A set of sample source and target point cloud objects are present in the [data](https://github.com/pranavkdm/R-PointHop/tree/main/data) folder which can be used for testing. Replace source_0 and target_0 with your choice of souce and target.
+
 ## Citation
 
 If you find our work useful in your research, please consider citing:
