@@ -8,7 +8,7 @@ In this repository, we release the code for training R-PointHop method and evalu
 
 ## Packages
 
-The code has been developed and tested in Python 3.6. The following packages need to be installed
+The code has been developed and tested in Python 3.6. The following packages need to be installed.
 
 ```
 h5py
@@ -17,6 +17,14 @@ scipy
 sklearn
 open3d
 ```
+
+## Training
+
+```
+python train.py
+```
+
+This will train the model using default parameters. User can vary the parameters like number of points in each hop, neighborhood size and energy threshold.
 
 ## Citation
 
