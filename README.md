@@ -2,7 +2,7 @@
 
 R-PointHop is an unsupervised learning based method for registration of 3D point cloud objcets. This is an official implementation of R-PointHop by [Pranav Kadam](https://github.com/pranavkdm), [Min Zhang](https://github.com/minzhang-1), Shan Liu and C.-C. Jay Kuo. This work was carried out at Media Communications Lab (MCL), University of Southern California, USA.
 
-[[arXiv](https://arxiv.org/)]
+[[arXiv](https://arxiv.org/abs/2103.08129)]
 
 ## Introduction
 
@@ -38,7 +38,7 @@ python train.py --first_20 True
 
 User can specify other parameters like number of points in each hop, neighborhood size and energy threshold, else default parameters will be used.
 
-## Testing 
+## Registration 
 
 ```
 python test.py --source ./data/source_0.ply --target ./data/target_0.ply
