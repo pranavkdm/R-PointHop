@@ -51,5 +51,12 @@ A set of sample source and target point cloud objects are present in the [data](
 If you find our work useful in your research, please consider citing:
 
 ```
-BibTeX information coming soon
+@article{kadam2021rpointhop,
+      title={R-PointHop: A Green, Accurate and Unsupervised Point Cloud Registration Method}, 
+      author={Pranav Kadam and Min Zhang and Shan Liu and C. -C. Jay Kuo},
+      year={2021},
+      eprint={2103.08129},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
