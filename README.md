@@ -1,4 +1,4 @@
-# R-PointHop: A Green and High Performance Point Cloud Registration Method
+# R-PointHop: A Green, Accurate and Unsupervised Point Cloud Registration Method
 
 R-PointHop is an unsupervised learning based method for registration of 3D point cloud objcets. This is an official implementation of R-PointHop by [Pranav Kadam](https://github.com/pranavkdm), [Min Zhang](https://github.com/minzhang-1), Shan Liu and C.-C. Jay Kuo. This work was carried out at Media Communications Lab (MCL), University of Southern California, USA.
 
@@ -53,7 +53,7 @@ If you find our work useful in your research, please consider citing:
 ```
 @article{kadam2021rpointhop,
       title={R-PointHop: A Green, Accurate and Unsupervised Point Cloud Registration Method}, 
-      author={Pranav Kadam and Min Zhang and Shan Liu and C. -C. Jay Kuo},
+      author={Pranav Kadam and Min Zhang and Shan Liu and C.-C. Jay Kuo},
       year={2021},
       eprint={2103.08129},
       archivePrefix={arXiv},
