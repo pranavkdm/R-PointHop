@@ -18,7 +18,7 @@ parser.add_argument('--num_sample', default=[64, 32, 48, 48],
                     help='kNN query number')
 parser.add_argument('--threshold', default=0.001, 
                     help='energy threshold for channel-wise Saab transform')
-parser.add_argument('--first_20', default=False, 
+parser.add_argument('--first_20', default=True, 
                     help='train on all 40 classes or first 20 classes')
 FLAGS = parser.parse_args()
 
@@ -39,12 +39,12 @@ def main():
                                 'modelnet40_ply_hdf5_2048'), train=True)
 
     if first_20:
-        train_data = train_data[train_label<20]
+        train_data = train_data[np.squeeze(train_label<20)]
 
     model = rpointhop.pointhop_train(True, train_data, n_newpoint=num_point,
                             n_sample=num_sample, threshold=threshold)
 
-    with open(os.path.join(MODEL_DIR, 'R-PointHop.pkl'), 'wb') as f:
+    with open(os.path.join(MODEL_DIR, 'R-PointHop1.pkl'), 'wb') as f:
         pickle.dump(model, f)
 
 if __name__ == '__main__':
