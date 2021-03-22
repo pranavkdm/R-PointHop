@@ -1,18 +1,19 @@
 import argparse
-import pickle
 import os
+import pickle
 import time
+import numpy as np
+import open3d as o3d
+import sklearn
+import data_transforms
 import modelnet40
 import rpointhop
-import numpy as np
-import sklearn
-import open3d as o3d
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--initial_point', type=int, default=1024, help='Point Number [256/512/1024/2048]')
-parser.add_argument('--log_dir', default='log', help='Log dir [default: log]')
+parser.add_argument('--model_dir', default='./model', help='Log dir [default: model]')
 parser.add_argument('--num_point', default=[1024, 896, 768, 640], help='Point Number after down sampling')
 parser.add_argument('--num_sample', default=[64, 32, 32, 32], help='KNN query number')
 parser.add_argument('--source', default='./data/source_0.ply', help='Path to source point cloud')
@@ -24,12 +25,7 @@ num_point = FLAGS.num_point
 num_sample = FLAGS.num_sample
 source_path = FLAGS.source
 target_path = FLAGS.target
-LOG_DIR = FLAGS.log_dir
-
-if not os.path.exists(LOG_DIR):
-    os.mkdir(LOG_DIR)
-LOG_FOUT = open(os.path.join(LOG_DIR, 'log_train_eva_temp_iter_confidence_4.txt'), 'w')
-LOG_FOUT.write(str(FLAGS) + '\n')
+MODEL_DIR = FLAGS.model_dir
 
 def read_pc(file):
 
@@ -48,7 +44,7 @@ def main():
     source_e = np.expand_dims(source_pc, axis=0)
     data_c = np.concatenate((target_e,source_e), axis=0)
 
-    with open(os.path.join(LOG_DIR, 'R-PointHop.pkl'), 'rb') as f:
+    with open(os.path.join(MODEL_DIR, 'R-PointHop.pkl'), 'rb') as f:
         params = pickle.load(f)
     f.close()
 
@@ -107,7 +103,7 @@ def main():
 
     source_aligned = data_transforms.apply_inverse_transformation(source_pc, angle[2], angle[1], angle[0], t)
 
-    angle_pred = data_transforms.matrix2euler(R, True)
+    # angle_pred = data_transforms.matrix2euler(R, True)
     
     target_pcd = o3d.geometry.PointCloud()
     target_pcd.points = o3d.utility.Vector3dVector(target_pc)
@@ -115,20 +111,15 @@ def main():
     source_pcd = o3d.geometry.PointCloud()
     source_pcd.points = o3d.utility.Vector3dVector(source_pc)
 
+    source_aligned_pcd = o3d.geometry.PointCloud()
+    source_aligned_pcd.points = o3d.utility.Vector3dVector(source_aligned)
+
     target_pcd.paint_uniform_color([220/255, 20/255, 60/255])
     source_pcd.paint_uniform_color([30/255, 144/255, 255/255])
+    source_aligned_pcd.paint_uniform_color([30/255, 144/255, 255/255])
     
     o3d.visualization.draw_geometries([target_pcd,source_pcd])
-
-
-
-
+    o3d.visualization.draw_geometries([target_pcd,source_aligned_pcd])
     
-        
-        
-
-
-
-
 if __name__ == '__main__':
     main()
