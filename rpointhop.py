@@ -125,12 +125,12 @@ def find_kernels_pca(sample_patches):
              / (np.sum(pca.explained_variance_[:kernels.shape[0]-1]) + largest_ev)
     return kernels, mean, energy
 
-def tree(Train, Bias, point_data, data, grouped_feature, idx, pre_energy, threshold, params):
+def tree(Train, Bias, point_data, data, grouped_feature, idx, pre_energy, threshold, params, size):
     
     if grouped_feature is None:
         grouped_feature = data
 
-    local_data = np.zeros((data.shape[0],data.shape[1],32,3))
+    local_data = np.zeros((data.shape[0],data.shape[1],size,3))
     local_kernels = np.zeros((data.shape[0],data.shape[1],3,3))
     local_mean = np.zeros((data.shape[0],data.shape[1],3,))
     pca = PCA(n_components=3)
@@ -146,22 +146,22 @@ def tree(Train, Bias, point_data, data, grouped_feature, idx, pre_energy, thresh
 
             median = np.median(p)
             sort = np.argsort(p)
-            left = np.sum(median-p[sort[:16]])
-            right = np.sum(p[sort[16:]]-median)
+            left = np.sum(median-p[sort[:int(size/2)]])
+            right = np.sum(p[sort[int(size/2):]]-median)
             if right >= left:
                 kernels[0,:] = -kernels[0,:]
 
             median = np.median(q)
             sort = np.argsort(q)
-            left = np.sum(median-q[sort[:16]])
-            right = np.sum(q[sort[16:]]-median)
+            left = np.sum(median-q[sort[:int(size/2)]])
+            right = np.sum(q[sort[int(size/2):]]-median)
             if right >= left:
                 kernels[1,:] = -kernels[1,:]
 
             median = np.median(r)
             sort = np.argsort(r)
-            left = np.sum(median-r[sort[:16]])
-            right = np.sum(r[sort[16:]]-median)
+            left = np.sum(median-r[sort[:int(size/2)]])
+            right = np.sum(r[sort[int(size/2):]]-median)
             if right >= left:
                 kernels[2,:] = -kernels[2,:]
 
@@ -261,7 +261,7 @@ def pointhop_train(Train, data, n_newpoint, n_sample, threshold):
         if i == 0:
             print(i)
             pre_energy = 1
-            params, output, local_kernels, local_mean = tree(Train, Bias[i], point_data, data, None, idx, pre_energy, threshold, None)
+            params, output, local_kernels, local_mean = tree(Train, Bias[i], point_data, data, None, idx, pre_energy, threshold, None, n_sample[0])
             pca_params['Layer_{:d}_pca_params'.format(i)] = params
             num_node = params['num_node']
             energy = params['energy']
@@ -418,7 +418,7 @@ def pointhop_pred(Train, data, pca_params, n_newpoint, n_sample):
             #print(i)
             params = pca_params['Layer_{:d}_pca_params'.format(i)]
             num_node = params['num_node']
-            params_t, output, local_kernels, local_mean = tree(Train, Bias[i], point_data, data, None, idx, None, None, params)
+            params_t, output, local_kernels, local_mean = tree(Train, Bias[i], point_data, data, None, idx, None, None, params, n_sample[0])
             info_test['Layer_{:d}_feature'.format(i)] = output[:num_node]
             info_test['Layer_{:d}_num_node'.format(i)] = num_node
             # if num_node != len(output):
